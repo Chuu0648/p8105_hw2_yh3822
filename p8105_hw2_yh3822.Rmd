@@ -12,6 +12,10 @@ library(dplyr)
 
 
 
+## Problem 1
+
+
+
 ```{r, warning=FALSE, message=FALSE}
 nyc_transit_df = 
   read_csv("./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
@@ -22,6 +26,33 @@ nyc_transit_df =
 
 
 This dataset describes the information related to each entrance and exit for each subway station in NYC, and it contains `r ncol(nyc_transit_df)` variables, which are line, station_name, station_latitude, station_longitude, route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, entry, vending, entrance_type, and ada. To clean up the data, I first made all the variable names lowercase, then filtered from there the variables I needed to use, removed the unnecessary ones, and finally converted the character variable “entry" to a logical variable. The dimension of this dataset is `r nrow(nyc_transit_df)` rows * `r ncol(nyc_transit_df)` columns. I think these data are tidy.
+
+
+```{r}
+distinct_stations = nyc_transit_df %>%
+  distinct(station_name, line)
+```
+
+There are `r nrow(distinct_stations)` distinct stations.
+
+
+```{r}
+ada_stations = nyc_transit_df %>%
+  filter(ada == TRUE) %>%
+  distinct(station_name, line)
+```
+
+There are `r  nrow(ada_stations)` stations are ADA compliant.
+
+
+```{r}
+no_vending_entry = nyc_transit_df %>%
+  filter(vending == "NO" & entry == TRUE) %>%
+  distinct(station_name, line)
+```
+
+There are `r (nrow(no_vending_entry)/nrow(distinct_stations))*100` percent of station entrances / exits without vending allow entrance.
+
 
 
 
