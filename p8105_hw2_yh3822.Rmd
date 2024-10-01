@@ -128,5 +128,10 @@ combined_trash_wheel_data <- bind_rows(mr_trash_wheel_df, professor_trash_wheel_
 ```
 
 
+This dataset contains information on the various types of trash for the three trash wheels, which are Mr. Trash Wheel, Professor Trash Wheel, and Gwynnda Trash Wheel, , reflecting the efforts of these devices to clean up waterways. The dataset contains `r nrow(combined_trash_wheel_data)` observations, with key variables including dumpster_number, month, year, weight_tons, plastic_bottles, polystyrene_containers, and so on. The total weight of trash collected by Professor Trash Wheel is `r sum(professor_trash_wheel_df$weight_tons, na.rm = TRUE)` tons. Additionally, Gwynnda collected `r sum(gwynnda_trash_wheel_df$cigarette_butts[gwynnda_trash_wheel_df$year == 2022 & gwynnda_trash_wheel_df$month == 'June'], na.rm = TRUE)` cigarette butts in June 2022.
+
+
+
+
 
 
