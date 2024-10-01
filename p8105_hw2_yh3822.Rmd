@@ -90,7 +90,7 @@ There are `r  nrow(ada_a_train_stations)` distinct stations that served A train 
 mr_trash_wheel_df = 
   read_xlsx("./data/202309 Trash Wheel Collection Data.xlsx", sheet = "Mr. Trash Wheel", skip = 1) %>%
   janitor::clean_names() %>%
-  select(-x15, -x16) %>%
+  select(-homes_powered, -x15, -x16) %>%
   rename(dumpster_number = dumpster) %>%
   filter(!is.na(dumpster_number)) %>%
   mutate(sports_balls = as.integer(round(sports_balls, 0)))
@@ -98,4 +98,12 @@ mr_trash_wheel_df =
 
 
 
+```{r, warning=FALSE, message=FALSE}
+professor_trash_wheel_df = 
+  read_xlsx("./data/202309 Trash Wheel Collection Data.xlsx", sheet = "Professor Trash Wheel", skip = 1) %>%
+  janitor::clean_names() %>%
+  select(-homes_powered) %>%
+  rename(dumpster_number = dumpster) %>%
+  filter(!is.na(dumpster_number))
+```
 
