@@ -16,12 +16,12 @@ library(dplyr)
 nyc_transit_df = 
   read_csv("./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
   janitor::clean_names() %>%
-  select(station_name, station_latitude, station_longitude, starts_with("route"), entry, vending, entrance_type, ada) %>%
+  select(line, station_name, station_latitude, station_longitude, starts_with("route"), entry, vending, entrance_type, ada) %>%
   mutate(entry = case_match(entry, "YES" ~ TRUE, "NO" ~ FALSE))
 ```
 
 
-This dataset describes the information related to each entrance and exit for each subway station in NYC, and it contains `r ncol(nyc_transit_df)` variables, which are station_name, station_latitude, station_longitude, route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, entry, vending, entrance_type, and ada. To clean up the data, I first made all the variable names lowercase, then filtered from there the variables I needed to use, removed the unnecessary ones, and finally converted the character variable “entry" to a logical variable. The dimension of this dataset is `r nrow(nyc_transit_df)` rows * `r ncol(nyc_transit_df)` columns. I think these data are tidy.
+This dataset describes the information related to each entrance and exit for each subway station in NYC, and it contains `r ncol(nyc_transit_df)` variables, which are line, station_name, station_latitude, station_longitude, route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, entry, vending, entrance_type, and ada. To clean up the data, I first made all the variable names lowercase, then filtered from there the variables I needed to use, removed the unnecessary ones, and finally converted the character variable “entry" to a logical variable. The dimension of this dataset is `r nrow(nyc_transit_df)` rows * `r ncol(nyc_transit_df)` columns. I think these data are tidy.
 
 
 
