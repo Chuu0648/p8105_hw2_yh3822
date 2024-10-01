@@ -66,6 +66,25 @@ nyc_transit_df_tidy = nyc_transit_df %>%
 ```
 
 
+```{r}
+a_train_stations = nyc_transit_df_tidy %>%
+  filter(route_name == "A") %>%
+  distinct(station_name, line)
+```
+
+There are `r  nrow(a_train_stations)` distinct stations that served A train.
+
+
+```{r}
+ada_a_train_stations = nyc_transit_df_tidy %>%
+  filter(route_name == "A", ada == TRUE) %>%
+  distinct(station_name, line)
+```
+
+There are `r  nrow(ada_a_train_stations)` distinct stations that served A train are ADA compliant.
+
+
+
 
 
 
