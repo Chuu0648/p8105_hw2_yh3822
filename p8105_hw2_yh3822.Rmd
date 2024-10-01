@@ -107,3 +107,17 @@ professor_trash_wheel_df =
   filter(!is.na(dumpster_number))
 ```
 
+
+```{r, warning=FALSE, message=FALSE}
+gwynnda_trash_wheel_df = 
+  read_xlsx("./data/202309 Trash Wheel Collection Data.xlsx", sheet = "Gwynnda Trash Wheel", skip = 1) %>%
+  janitor::clean_names() %>%
+  select(-homes_powered) %>%
+  rename(dumpster_number = dumpster) %>%
+  filter(!is.na(dumpster_number))
+```
+
+
+
+
+
