@@ -4,10 +4,20 @@ output: github_document
 date: "2024-10-01"
 ---
 
-```{r set up}
+```{r set up, warning=FALSE, message=FALSE}
 library(tidyverse)
 library(readxl)
 library(dplyr)
+```
+
+
+
+```{r, warning=FALSE, message=FALSE}
+nyc_transit_df = 
+  read_csv("./data/NYC_Transit_Subway_Entrance_And_Exit_Data.csv") %>%
+  janitor::clean_names() %>%
+  select(station_name, station_latitude, station_longitude, starts_with("route"), entry, vending, entrance_type, ada) %>%
+  mutate(entry = case_match(entry, "YES" ~ TRUE, "NO" ~ FALSE))
 ```
 
 
