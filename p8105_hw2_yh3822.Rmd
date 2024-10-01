@@ -93,7 +93,9 @@ mr_trash_wheel_df =
   select(-homes_powered, -x15, -x16) %>%
   rename(dumpster_number = dumpster) %>%
   filter(!is.na(dumpster_number)) %>%
-  mutate(sports_balls = as.integer(round(sports_balls, 0)))
+  mutate(sports_balls = as.integer(round(sports_balls, 0))) %>%
+  mutate(trash_wheel = "Mr. Trash Wheel") %>%
+  mutate(year = as.integer(year))
 ```
 
 
@@ -104,7 +106,9 @@ professor_trash_wheel_df =
   janitor::clean_names() %>%
   select(-homes_powered) %>%
   rename(dumpster_number = dumpster) %>%
-  filter(!is.na(dumpster_number))
+  filter(!is.na(dumpster_number)) %>%
+  mutate(trash_wheel = "Professor Trash Wheel") %>%
+  mutate(year = as.integer(year))
 ```
 
 
@@ -114,9 +118,14 @@ gwynnda_trash_wheel_df =
   janitor::clean_names() %>%
   select(-homes_powered) %>%
   rename(dumpster_number = dumpster) %>%
-  filter(!is.na(dumpster_number))
+  filter(!is.na(dumpster_number)) %>%
+  mutate(trash_wheel = "Gwynnda Trash Wheel") %>%
+  mutate(year = as.integer(year))
 ```
 
+```{r}
+combined_trash_wheel_data <- bind_rows(mr_trash_wheel_df, professor_trash_wheel_df, gwynnda_trash_wheel_df)
+```
 
 
 
