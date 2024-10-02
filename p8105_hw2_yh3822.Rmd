@@ -164,6 +164,16 @@ results_df =
 ```
 
 
+Then check for completeness across the datasets
 
+```{r}
+missing_bakes1 <- anti_join(bakes_df, bakers_df, by = "baker_name")
+missing_bakes2 <- anti_join(bakes_df, results_df, by = "baker_name")
+missing_bakes3 <- anti_join(bakers_df, results_df, by = "baker_name")
+missing_bakes1 
+missing_bakes2
+missing_bakes3
+```
 
+We can find that there are some missing bakers in the results_df.
 
