@@ -137,22 +137,32 @@ This dataset contains information on the various types of trash for the three tr
 
 First, import and clean the data.
 
+I found that only the name in the bakers dataset contains both the first and last name, the other two only have the first name, so I turned the name in the bakers dataset into two variables, the first name (which is "baker_name") and last name (which is baker_last_name) . I adjusted the alignment of the variables in all three datasets so that they are all consistent and are all arranged by name and series to make it easier to view and analyze the data. Someone's name looks weird in bakes_df, so I use the mutate function to rename the weird names.
+
 ```{r, warning=FALSE, message=FALSE}
 bakers_df = 
   read_csv("./data/gbb_datasets/bakers.csv") %>%
   janitor::clean_names() %>%
-  filter(!is.na(baker_name)) 
+  filter(!is.na(baker_name)) %>%
+  separate(baker_name, into = c("baker_name", "baker_last_name"), sep = " ", extra = "merge") %>%
+  relocate(series, baker_name, baker_last_name) %>%
+  arrange(baker_name, series)
 bakes_df = 
   read_csv("./data/gbb_datasets/bakes.csv") %>%
   janitor::clean_names() %>%
   rename(baker_name = baker) %>%
-  filter(!is.na(baker_name))
+  mutate(baker_name = gsub('"', '', baker_name)) %>%
+  filter(!is.na(baker_name)) %>%
+  arrange(baker_name, series, episode)
 results_df = 
   read_csv("./data/gbb_datasets/results.csv", skip = 2) %>%
   janitor::clean_names() %>%
   rename(baker_name = baker) %>%
-  filter(!is.na(baker_name))
+  filter(!is.na(baker_name)) %>%
+  filter(!is.na(result)) %>%
+  arrange(baker_name, series, episode)
 ```
+
 
 
 
