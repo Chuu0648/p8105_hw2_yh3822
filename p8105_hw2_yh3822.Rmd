@@ -132,6 +132,28 @@ This dataset contains information on the various types of trash for the three tr
 
 
 
+## Problem 3
+
+
+First, import and clean the data.
+
+```{r, warning=FALSE, message=FALSE}
+bakers_df = 
+  read_csv("./data/gbb_datasets/bakers.csv") %>%
+  janitor::clean_names() %>%
+  filter(!is.na(baker_name)) 
+bakes_df = 
+  read_csv("./data/gbb_datasets/bakes.csv") %>%
+  janitor::clean_names() %>%
+  rename(baker_name = baker) %>%
+  filter(!is.na(baker_name))
+results_df = 
+  read_csv("./data/gbb_datasets/results.csv", skip = 2) %>%
+  janitor::clean_names() %>%
+  rename(baker_name = baker) %>%
+  filter(!is.na(baker_name))
+```
+
 
 
 
