@@ -177,3 +177,21 @@ missing_bakes3
 
 We can find that there are some missing bakers in the results_df.
 
+
+When I tried to merge three datasets by the bakers' name, it appeared a warning, which was "Detected an unexpected many-to-many relationship between `x` and `y`". Then I tried to merge the datasets by the bakers' name, series, and episode at the same time.
+
+Firstly I will merge bakes_df and results_df by the bakers' name, series, and episode.
+
+```{r}
+bakes_results_df = bakes_df %>%
+  left_join(results_df, by = c("baker_name", "series", "episode"))
+```
+
+Then I merged the new dataset and bakers_df by the bakers' name, and series.
+
+```{r}
+merged_bakers_df =
+    left_join(bakes_results_df, bakers_df, by = c("baker_name", "series")) 
+```
+
+
