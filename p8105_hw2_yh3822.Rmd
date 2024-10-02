@@ -212,5 +212,7 @@ write_csv (merged_bakers_df, "./data/merged_bakers.csv")
 ```
 
 
+Briefly description: 
 
+The final dataset contains bakers' basic information and their bakes and results in the competition. There are `r nrow(merged_bakers_df)` rows and `r ncol(merged_bakers_df)` columns, with key variables including series, baker_name, baker_age, signature_bake and so on.
 
