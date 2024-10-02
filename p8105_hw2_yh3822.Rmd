@@ -216,3 +216,23 @@ Briefly description:
 
 The final dataset contains bakers' basic information and their bakes and results in the competition. There are `r nrow(merged_bakers_df)` rows and `r ncol(merged_bakers_df)` columns, with key variables including series, baker_name, baker_age, signature_bake and so on.
 
+
+```{r}
+star_bakers_df = merged_bakers_df %>%
+  filter(series >= 5 & series <= 10, result == "STAR BAKER") %>%
+  select(series, episode, baker_name, result) %>%
+  arrange(series, episode)
+```
+
+
+
+```{r}
+reader_friendly_table = star_bakers_df %>%
+  select(-result) %>%
+  pivot_wider(names_from = episode, values_from = baker_name, 
+              names_prefix = "Episode_")
+knitr::kable(reader_friendly_table)
+```
+
+From the table, we can predict that Richard has the most probability to win in the series 5, Ian and Nadiya are most likely to win in the series 6, Candice is most likely to win in the series 7, Steven is most likely to win in the series 8.
+
