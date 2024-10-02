@@ -236,3 +236,27 @@ knitr::kable(reader_friendly_table)
 
 From the table, we can predict that Richard has the most probability to win in the series 5, Ian and Nadiya are most likely to win in the series 6, Candice is most likely to win in the series 7, Steven is most likely to win in the series 8.
 
+
+```{r, warning=FALSE, message=FALSE}
+viewers_df = 
+  read_csv("./data/gbb_datasets/viewers.csv") %>%
+  janitor::clean_names() %>%
+  mutate_if(is.numeric, ~ round(., 2))
+```
+
+To better view the datatset, I change the position of series and episode.
+
+```{r}
+viewers_df = viewers_df %>%
+  pivot_longer(cols = starts_with("series_"),  
+               names_to = "series",
+               names_prefix = "series_",
+               values_to = "viewers") %>%
+  pivot_wider(names_from = episode, 
+              values_from = viewers,
+              names_prefix = "episode_")
+head(viewers_df, n = 10)
+```
+
+The average viewership for Season 1 was `r mean(viewers_df %>% filter(series == 1) %>% select(starts_with("episode_")) %>% unlist(), na.rm = TRUE)` million viewers. The average viewership for Season 5 was `r mean(viewers_df %>% filter(series == 5) %>% select(starts_with("episode_")) %>% unlist(), na.rm = TRUE)` million viewers.
+
